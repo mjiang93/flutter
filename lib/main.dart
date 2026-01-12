@@ -15,7 +15,7 @@ import 'core/utils/log_util.dart';
 import 'data/datasources/local/sp_manager.dart';
 import 'data/datasources/remote/services/request_cache_service.dart';
 import 'firebase_options.dart';
-import 'injection/locator.dart';
+import 'injection/mock_locator.dart';
 import 'presentation/controllers/network_controller.dart';
 import 'presentation/theme/theme_controller.dart';
 import 'presentation/pages/main_tab_page.dart';
