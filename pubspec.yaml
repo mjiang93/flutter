@@ -50,7 +50,7 @@ dependencies:
   
   # UI
   cached_network_image: ^3.3.0
-  carousel_slider: ^4.2.1
+  carousel_slider: ^5.0.0
   
   # Firebase (for analytics and crashlytics)
   firebase_core: ^2.24.2

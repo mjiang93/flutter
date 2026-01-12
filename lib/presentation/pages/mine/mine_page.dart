@@ -1,6 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../domain/usecases/get_user_info_usecase.dart';
+import '../../../domain/usecases/logout_usecase.dart';
+import '../../../injection/locator.dart';
 import '../../controllers/mine_controller.dart';
 import '../base_page.dart';
 import 'widgets/user_info_widget.dart';
@@ -26,9 +29,10 @@ class MinePage extends BasePage {
   @override
   Widget buildBody(BuildContext context) {
     // Inject controller with Get.put for lifecycle management
+    // Get dependencies from getIt instead of Get.find
     final controller = Get.put(MineController(
-      Get.find(),
-      Get.find(),
+      getIt(),
+      getIt(),
     ));
 
     final theme = Theme.of(context);

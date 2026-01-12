@@ -1,29 +1,24 @@
 import 'package:dio/dio.dart';
-import 'package:retrofit/retrofit.dart';
 import '../../../models/base_response.dart';
 import '../../../models/user_response.dart';
-
-part 'user_api_service.g.dart';
+import 'user_api_service_impl.dart';
 
 /// User API service
 /// 
-/// Defines user-related API endpoints using Retrofit
-@RestApi()
+/// Defines user-related API endpoints
 abstract class UserApiService {
-  factory UserApiService(Dio dio, {String? baseUrl}) = _UserApiService;
+  factory UserApiService(Dio dio, {String? baseUrl}) => UserApiServiceImpl(dio, baseUrl: baseUrl);
 
   /// Get user information
-  @GET('/user/{id}')
-  Future<BaseResponse<UserResponse>> getUserInfo(@Path('id') String userId);
+  Future<BaseResponse<UserResponse>> getUserInfo(String userId);
 
   /// Update user information
-  @PUT('/user/{id}')
   Future<BaseResponse<UserResponse>> updateUserInfo(
-    @Path('id') String userId,
-    @Body() Map<String, dynamic> data,
+    String userId,
+    Map<String, dynamic> data,
   );
 
   /// Logout
-  @DELETE('/auth/logout')
   Future<BaseResponse<void>> logout();
 }
+

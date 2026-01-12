@@ -64,7 +64,7 @@ class MainTabController extends GetxController {
   int get unreadCount {
     try {
       final messageController = Get.find<MessageController>();
-      return messageController.unreadCount.value;
+      return messageController.unreadCount;
     } catch (e) {
       return 0;
     }

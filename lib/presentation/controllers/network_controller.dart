@@ -19,7 +19,7 @@ class NetworkController extends GetxController {
   bool get isConnected => _isConnected.value;
   ConnectivityResult get connectionType => _connectionType.value;
 
-  late StreamSubscription<List<ConnectivityResult>> _subscription;
+  late StreamSubscription<ConnectivityResult> _subscription;
 
   NetworkController({RequestCacheService? requestCacheService})
       : _requestCacheService = requestCacheService;
@@ -36,17 +36,15 @@ class NetworkController extends GetxController {
   /// Initialize connectivity status
   Future<void> _initConnectivity() async {
     try {
-      final results = await Connectivity().checkConnectivity();
-      _updateConnectionStatus(results);
+      final result = await Connectivity().checkConnectivity();
+      _updateConnectionStatus(result);
     } catch (e) {
       LogUtil.e('Failed to check connectivity', e);
     }
   }
 
   /// Update connection status and show toast notification
-  void _updateConnectionStatus(List<ConnectivityResult> results) {
-    final result = results.isNotEmpty ? results.first : ConnectivityResult.none;
-
+  void _updateConnectionStatus(ConnectivityResult result) {
     final wasConnected = _isConnected.value;
     _isConnected.value = result != ConnectivityResult.none;
     _connectionType.value = result;

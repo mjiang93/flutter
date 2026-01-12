@@ -17,7 +17,7 @@ import 'data/datasources/remote/services/request_cache_service.dart';
 import 'firebase_options.dart';
 import 'injection/locator.dart';
 import 'presentation/controllers/network_controller.dart';
-import 'presentation/controllers/theme_controller.dart';
+import 'presentation/theme/theme_controller.dart';
 import 'presentation/pages/main_tab_page.dart';
 import 'presentation/theme/app_theme.dart';
 
@@ -166,10 +166,8 @@ class MyApp extends StatelessWidget {
         defaultTransition: Transition.cupertino,
         transitionDuration: const Duration(milliseconds: 300),
         
-        // Firebase Analytics navigation observer
-        navigatorObservers: [
-          FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance),
-        ],
+        // Firebase Analytics navigation observer (only if Firebase is initialized)
+        navigatorObservers: _getNavigatorObservers(),
         
         // Builder for global widgets (e.g., loading overlay)
         builder: (context, child) {
@@ -192,6 +190,19 @@ class MyApp extends StatelessWidget {
       return AppTheme.customTheme(primaryColor: controller.customPrimaryColor!);
     }
     return AppTheme.lightTheme;
+  }
+
+  /// Get navigator observers (safely handle Firebase initialization)
+  List<NavigatorObserver> _getNavigatorObservers() {
+    try {
+      // Only add Firebase observer if Firebase is initialized
+      return [
+        FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance),
+      ];
+    } catch (e) {
+      // Firebase not initialized, return empty list
+      return [];
+    }
   }
 
   /// Convert AppThemeMode to Flutter ThemeMode
@@ -254,16 +265,24 @@ Future<void> _setupErrorHandling() async {
       details.stack,
     );
 
-    // Report to Crashlytics
-    FirebaseCrashlytics.instance.recordFlutterFatalError(details);
+    // Report to Crashlytics (only if Firebase is initialized)
+    try {
+      FirebaseCrashlytics.instance.recordFlutterFatalError(details);
+    } catch (e) {
+      // Firebase not initialized, skip Crashlytics reporting
+    }
   };
 
   // Catch Dart async errors
   PlatformDispatcher.instance.onError = (error, stack) {
     LogUtil.e('Async error: $error', error, stack);
 
-    // Report to Crashlytics
-    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    // Report to Crashlytics (only if Firebase is initialized)
+    try {
+      FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    } catch (e) {
+      // Firebase not initialized, skip Crashlytics reporting
+    }
 
     return true;
   };

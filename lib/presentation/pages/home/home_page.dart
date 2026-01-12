@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../domain/usecases/get_home_data_usecase.dart';
+import '../../../injection/locator.dart';
 import '../../controllers/home_controller.dart';
 import '../../widgets/refresh_load_more_list.dart';
 import '../base_page.dart';
@@ -28,7 +30,8 @@ class HomePage extends BasePage {
   @override
   Widget buildBody(BuildContext context) {
     // Inject controller with Get.put for lifecycle management
-    final controller = Get.put(HomeController(Get.find()));
+    // Get dependencies from getIt instead of Get.find
+    final controller = Get.put(HomeController(getIt<GetHomeDataUseCase>()));
 
     return Obx(() {
       return RefreshLoadMoreList(

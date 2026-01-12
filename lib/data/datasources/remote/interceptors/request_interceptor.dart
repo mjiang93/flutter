@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../core/configs/app_config.dart';
 import '../../../../core/configs/flavor_config.dart';
 import '../../../../core/constants/cache_keys.dart';
+import '../../../../core/errors/network_exception.dart';
 import '../../../../core/utils/encryption_util.dart';
 import '../../../../core/utils/log_util.dart';
 
@@ -30,7 +31,7 @@ class RequestInterceptor extends Interceptor {
         handler.reject(
           DioException(
             requestOptions: options,
-            error: const RequestCancelledException(),
+            error: RequestCancelledException(),
             type: DioExceptionType.cancel,
           ),
         );

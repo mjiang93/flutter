@@ -44,7 +44,7 @@ class ResponseInterceptor extends Interceptor {
               DioException(
                 requestOptions: response.requestOptions,
                 response: response,
-                error: UnauthorizedException(message ?? 'Unauthorized'),
+                error: UnauthorizedException(message: message),
               ),
             );
             break;
@@ -56,7 +56,7 @@ class ResponseInterceptor extends Interceptor {
               DioException(
                 requestOptions: response.requestOptions,
                 response: response,
-                error: ForbiddenException(message ?? 'Forbidden'),
+                error: ForbiddenException(message: message),
               ),
             );
             break;
@@ -68,7 +68,7 @@ class ResponseInterceptor extends Interceptor {
               DioException(
                 requestOptions: response.requestOptions,
                 response: response,
-                error: NotFoundException(message ?? 'Resource not found'),
+                error: NotFoundException(message: message),
               ),
             );
             break;
@@ -79,7 +79,7 @@ class ResponseInterceptor extends Interceptor {
               DioException(
                 requestOptions: response.requestOptions,
                 response: response,
-                error: ValidationException(message ?? 'Validation failed'),
+                error: ValidationException(message: message),
               ),
             );
             break;

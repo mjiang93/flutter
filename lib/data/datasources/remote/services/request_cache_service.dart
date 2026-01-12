@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:uuid/uuid.dart';
-import '../../../core/utils/log_util.dart';
-import '../../datasources/local/dao/cached_request_isar_dao.dart';
-import '../../datasources/local/models/cached_request_isar_model.dart';
+import '../../../../core/utils/log_util.dart';
+import '../../local/dao/cached_request_isar_dao.dart';
+import '../../local/models/cached_request_isar_model.dart';
 
 /// Service for caching and retrying failed network requests
 class RequestCacheService {

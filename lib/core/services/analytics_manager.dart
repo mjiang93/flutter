@@ -35,10 +35,15 @@ class AnalyticsManager {
   ///
   /// Should be called during app startup after Firebase initialization
   static Future<void> initialize() async {
-    _analytics = FirebaseAnalytics.instance;
-    _deviceId = await _getDeviceId();
+    try {
+      _analytics = FirebaseAnalytics.instance;
+      _deviceId = await _getDeviceId();
 
-    LogUtil.i('Analytics initialized with device ID: $_deviceId');
+      LogUtil.i('Analytics initialized with device ID: $_deviceId');
+    } catch (e) {
+      LogUtil.w('Failed to initialize Analytics (Firebase may not be configured): $e');
+      _analytics = null;
+    }
   }
 
   /// Get device ID for analytics
