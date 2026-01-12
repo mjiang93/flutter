@@ -1,0 +1,59 @@
+{
+  "app": {
+    "name": "Enterprise Flutter App",
+    "title": "Enterprise App"
+  },
+  "common": {
+    "ok": "OK",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "delete": "Delete",
+    "edit": "Edit",
+    "save": "Save",
+    "loading": "Loading...",
+    "retry": "Retry",
+    "refresh": "Refresh",
+    "no_data": "No data available",
+    "no_network": "Network connection failed",
+    "error": "Something went wrong",
+    "permission_denied": "Permission denied",
+    "success": "Success",
+    "failed": "Failed"
+  },
+  "home": {
+    "title": "Home",
+    "refresh": "Pull to refresh",
+    "load_more": "Loading more...",
+    "no_more": "No more data"
+  },
+  "message": {
+    "title": "Messages",
+    "unread": "Unread",
+    "mark_read": "Mark as read",
+    "no_messages": "No messages"
+  },
+  "mine": {
+    "title": "Mine",
+    "settings": "Settings",
+    "theme": "Theme",
+    "language": "Language",
+    "logout": "Logout",
+    "logout_confirm": "Are you sure you want to logout?"
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System",
+    "custom": "Custom"
+  },
+  "language": {
+    "english": "English",
+    "chinese": "Chinese"
+  },
+  "error": {
+    "network": "Network error",
+    "timeout": "Request timeout",
+    "server": "Server error",
+    "unknown": "Unknown error"
+  }
+}

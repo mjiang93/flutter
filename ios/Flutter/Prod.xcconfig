@@ -1,0 +1,8 @@
+#include "Generated.xcconfig"
+
+// Prod flavor configuration
+PRODUCT_BUNDLE_IDENTIFIER = com.enterprise.flutter
+PRODUCT_NAME = Enterprise Flutter
+FLUTTER_BUILD_NAME = 1.0.0
+FLUTTER_BUILD_NUMBER = 1
+ASSET_PREFIX = prod

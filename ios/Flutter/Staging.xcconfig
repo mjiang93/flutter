@@ -1,0 +1,8 @@
+#include "Generated.xcconfig"
+
+// Test flavor configuration
+PRODUCT_BUNDLE_IDENTIFIER = com.enterprise.flutter.test
+PRODUCT_NAME = Enterprise Flutter Test
+FLUTTER_BUILD_NAME = 1.0.0
+FLUTTER_BUILD_NUMBER = 1
+ASSET_PREFIX = test

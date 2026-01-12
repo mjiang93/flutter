@@ -1,0 +1,36 @@
+# Build configuration for code generation
+targets:
+  $default:
+    builders:
+      freezed:
+        enabled: true
+        options:
+          # Generate copyWith, ==, hashCode, toString
+          union: true
+          union_key: 'type'
+          
+      json_serializable:
+        enabled: true
+        options:
+          # Generate fromJson and toJson
+          any_map: false
+          checked: true
+          create_to_json: true
+          disallow_unrecognized_keys: false
+          explicit_to_json: true
+          field_rename: snake
+          
+      retrofit_generator:
+        enabled: false
+        options:
+          # Generate Retrofit API clients
+          
+      auto_route_generator:
+        enabled: true
+        options:
+          # Generate AutoRoute navigation
+          
+      isar_generator:
+        enabled: true
+        options:
+          # Generate Isar database schemas

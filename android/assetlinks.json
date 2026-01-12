@@ -1,0 +1,32 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.enterprise.flutter",
+      "sha256_cert_fingerprints": [
+        "YOUR_SHA256_FINGERPRINT_HERE"
+      ]
+    }
+  },
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.enterprise.flutter.dev",
+      "sha256_cert_fingerprints": [
+        "YOUR_DEV_SHA256_FINGERPRINT_HERE"
+      ]
+    }
+  },
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.enterprise.flutter.test",
+      "sha256_cert_fingerprints": [
+        "YOUR_TEST_SHA256_FINGERPRINT_HERE"
+      ]
+    }
+  }
+]

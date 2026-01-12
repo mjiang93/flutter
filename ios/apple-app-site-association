@@ -1,0 +1,41 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "TEAM_ID.com.enterprise.flutter",
+        "paths": [
+          "/home/*",
+          "/message/*",
+          "/mine/*",
+          "/settings/*"
+        ]
+      },
+      {
+        "appID": "TEAM_ID.com.enterprise.flutter.dev",
+        "paths": [
+          "/home/*",
+          "/message/*",
+          "/mine/*",
+          "/settings/*"
+        ]
+      },
+      {
+        "appID": "TEAM_ID.com.enterprise.flutter.test",
+        "paths": [
+          "/home/*",
+          "/message/*",
+          "/mine/*",
+          "/settings/*"
+        ]
+      }
+    ]
+  },
+  "webcredentials": {
+    "apps": [
+      "TEAM_ID.com.enterprise.flutter",
+      "TEAM_ID.com.enterprise.flutter.dev",
+      "TEAM_ID.com.enterprise.flutter.test"
+    ]
+  }
+}

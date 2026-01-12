@@ -1,0 +1,8 @@
+#include "Generated.xcconfig"
+
+// Dev flavor configuration
+PRODUCT_BUNDLE_IDENTIFIER = com.enterprise.flutter.dev
+PRODUCT_NAME = Enterprise Flutter Dev
+FLUTTER_BUILD_NAME = 1.0.0
+FLUTTER_BUILD_NUMBER = 1
+ASSET_PREFIX = dev
