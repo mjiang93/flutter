@@ -2,9 +2,9 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+// import 'package:firebase_analytics/firebase_analytics.dart';
+// import 'package:firebase_core/firebase_core.dart';
+// import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -14,7 +14,7 @@ import 'core/services/analytics_manager.dart';
 import 'core/utils/log_util.dart';
 import 'data/datasources/local/sp_manager.dart';
 import 'data/datasources/remote/services/request_cache_service.dart';
-import 'firebase_options.dart';
+// import 'firebase_options.dart';
 import 'injection/mock_locator.dart';
 import 'presentation/controllers/network_controller.dart';
 import 'presentation/theme/theme_controller.dart';
@@ -194,15 +194,17 @@ class MyApp extends StatelessWidget {
 
   /// Get navigator observers (safely handle Firebase initialization)
   List<NavigatorObserver> _getNavigatorObservers() {
-    try {
-      // Only add Firebase observer if Firebase is initialized
-      return [
-        FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance),
-      ];
-    } catch (e) {
-      // Firebase not initialized, return empty list
-      return [];
-    }
+    // Temporarily disabled Firebase Analytics
+    return [];
+    // try {
+    //   // Only add Firebase observer if Firebase is initialized
+    //   return [
+    //     FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance),
+    //   ];
+    // } catch (e) {
+    //   // Firebase not initialized, return empty list
+    //   return [];
+    // }
   }
 
   /// Convert AppThemeMode to Flutter ThemeMode
@@ -225,30 +227,34 @@ class MyApp extends StatelessWidget {
 /// Initializes Firebase Core and configures Crashlytics
 Future<void> _initializeFirebase() async {
   try {
-    // Initialize Firebase with platform-specific options
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
+    // Firebase temporarily disabled
+    LogUtil.i('Firebase initialization skipped (temporarily disabled)');
+    return;
     
-    LogUtil.i('Firebase initialized successfully');
+    // // Initialize Firebase with platform-specific options
+    // await Firebase.initializeApp(
+    //   options: DefaultFirebaseOptions.currentPlatform,
+    // );
+    
+    // LogUtil.i('Firebase initialized successfully');
 
-    // Configure Crashlytics
-    // Pass all uncaught "fatal" errors from the framework to Crashlytics
-    FlutterError.onError = (errorDetails) {
-      FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
-    };
+    // // Configure Crashlytics
+    // // Pass all uncaught "fatal" errors from the framework to Crashlytics
+    // FlutterError.onError = (errorDetails) {
+    //   FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
+    // };
 
-    // Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
-    PlatformDispatcher.instance.onError = (error, stack) {
-      FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
-      return true;
-    };
+    // // Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
+    // PlatformDispatcher.instance.onError = (error, stack) {
+    //   FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    //   return true;
+    // };
 
-    // Set custom keys for crash reports
-    await FirebaseCrashlytics.instance.setCustomKey('flavor', FlavorConfig.instance.flavor.name);
-    await FirebaseCrashlytics.instance.setCustomKey('app_version', '1.0.0'); // TODO: Get from package_info
+    // // Set custom keys for crash reports
+    // await FirebaseCrashlytics.instance.setCustomKey('flavor', FlavorConfig.instance.flavor.name);
+    // await FirebaseCrashlytics.instance.setCustomKey('app_version', '1.0.0'); // TODO: Get from package_info
 
-    LogUtil.i('Crashlytics configured successfully');
+    // LogUtil.i('Crashlytics configured successfully');
   } catch (e, stackTrace) {
     LogUtil.e('Failed to initialize Firebase', e, stackTrace);
     // Don't rethrow - app should continue even if Firebase fails
@@ -265,24 +271,26 @@ Future<void> _setupErrorHandling() async {
       details.stack,
     );
 
-    // Report to Crashlytics (only if Firebase is initialized)
-    try {
-      FirebaseCrashlytics.instance.recordFlutterFatalError(details);
-    } catch (e) {
-      // Firebase not initialized, skip Crashlytics reporting
-    }
+    // Firebase temporarily disabled
+    // // Report to Crashlytics (only if Firebase is initialized)
+    // try {
+    //   FirebaseCrashlytics.instance.recordFlutterFatalError(details);
+    // } catch (e) {
+    //   // Firebase not initialized, skip Crashlytics reporting
+    // }
   };
 
   // Catch Dart async errors
   PlatformDispatcher.instance.onError = (error, stack) {
     LogUtil.e('Async error: $error', error, stack);
 
-    // Report to Crashlytics (only if Firebase is initialized)
-    try {
-      FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
-    } catch (e) {
-      // Firebase not initialized, skip Crashlytics reporting
-    }
+    // Firebase temporarily disabled
+    // // Report to Crashlytics (only if Firebase is initialized)
+    // try {
+    //   FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    // } catch (e) {
+    //   // Firebase not initialized, skip Crashlytics reporting
+    // }
 
     return true;
   };

@@ -1,4 +1,4 @@
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+// import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:logger/logger.dart';
 
@@ -101,20 +101,21 @@ class LogUtil {
   ]) {
     _instance.e(message, error: error, stackTrace: stackTrace);
 
-    // Report to Crashlytics
-    if (error != null) {
-      try {
-        FirebaseCrashlytics.instance.recordError(
-          error,
-          stackTrace,
-          reason: message,
-          fatal: false,
-        );
-      } catch (e) {
-        // Ignore Crashlytics errors to prevent infinite loop
-        debugPrint('Failed to report error to Crashlytics: $e');
-      }
-    }
+    // Firebase temporarily disabled
+    // // Report to Crashlytics
+    // if (error != null) {
+    //   try {
+    //     FirebaseCrashlytics.instance.recordError(
+    //       error,
+    //       stackTrace,
+    //       reason: message,
+    //       fatal: false,
+    //     );
+    //   } catch (e) {
+    //     // Ignore Crashlytics errors to prevent infinite loop
+    //     debugPrint('Failed to report error to Crashlytics: $e');
+    //   }
+    // }
   }
 
   /// Log verbose message (very detailed)

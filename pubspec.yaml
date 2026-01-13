@@ -52,10 +52,10 @@ dependencies:
   cached_network_image: ^3.3.0
   carousel_slider: ^5.0.0
   
-  # Firebase (for analytics and crashlytics)
-  firebase_core: ^2.24.2
-  firebase_analytics: ^10.7.4
-  firebase_crashlytics: ^3.4.8
+  # Firebase (for analytics and crashlytics) - Temporarily disabled
+  # firebase_core: ^2.24.2
+  # firebase_analytics: ^10.7.4
+  # firebase_crashlytics: ^3.4.8
   
   # Platform
   dartz: ^0.10.1
@@ -63,6 +63,9 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  
+  # Testing
+  mockito: ^5.4.4
   
   # Linting
   flutter_lints: ^3.0.1

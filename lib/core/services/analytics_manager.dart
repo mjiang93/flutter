@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
+// import 'package:firebase_analytics/firebase_analytics.dart';
 
 import '../configs/flavor_config.dart';
 import '../utils/log_util.dart';
@@ -28,7 +28,7 @@ import '../utils/log_util.dart';
 class AnalyticsManager {
   AnalyticsManager._();
 
-  static FirebaseAnalytics? _analytics;
+  // static FirebaseAnalytics? _analytics;
   static String? _deviceId;
 
   /// Initialize analytics
@@ -36,13 +36,14 @@ class AnalyticsManager {
   /// Should be called during app startup after Firebase initialization
   static Future<void> initialize() async {
     try {
-      _analytics = FirebaseAnalytics.instance;
+      // Firebase temporarily disabled
+      // _analytics = FirebaseAnalytics.instance;
       _deviceId = await _getDeviceId();
 
-      LogUtil.i('Analytics initialized with device ID: $_deviceId');
+      LogUtil.i('Analytics initialized with device ID: $_deviceId (Firebase disabled)');
     } catch (e) {
-      LogUtil.w('Failed to initialize Analytics (Firebase may not be configured): $e');
-      _analytics = null;
+      LogUtil.w('Failed to initialize Analytics: $e');
+      // _analytics = null;
     }
   }
 
@@ -81,25 +82,29 @@ class AnalyticsManager {
     String pageName, {
     Map<String, dynamic>? parameters,
   }) async {
-    if (_analytics == null) {
-      LogUtil.w('Analytics not initialized, skipping page view: $pageName');
-      return;
-    }
+    // Firebase temporarily disabled
+    LogUtil.d('Page view (Firebase disabled): $pageName');
+    return;
+    
+    // if (_analytics == null) {
+    //   LogUtil.w('Analytics not initialized, skipping page view: $pageName');
+    //   return;
+    // }
 
-    try {
-      // Add metadata
-      final enrichedParams = await _enrichParameters(parameters ?? {});
+    // try {
+    //   // Add metadata
+    //   final enrichedParams = await _enrichParameters(parameters ?? {});
 
-      // Log to Firebase Analytics
-      await _analytics!.logScreenView(
-        screenName: pageName,
-        parameters: enrichedParams,
-      );
+    //   // Log to Firebase Analytics
+    //   await _analytics!.logScreenView(
+    //     screenName: pageName,
+    //     parameters: enrichedParams,
+    //   );
 
-      LogUtil.d('Page view logged: $pageName');
-    } catch (e) {
-      LogUtil.e('Failed to log page view: $pageName', e);
-    }
+    //   LogUtil.d('Page view logged: $pageName');
+    // } catch (e) {
+    //   LogUtil.e('Failed to log page view: $pageName', e);
+    // }
   }
 
   /// Log custom event
@@ -122,25 +127,29 @@ class AnalyticsManager {
     String eventName,
     Map<String, dynamic> parameters,
   ) async {
-    if (_analytics == null) {
-      LogUtil.w('Analytics not initialized, skipping event: $eventName');
-      return;
-    }
+    // Firebase temporarily disabled
+    LogUtil.d('Event (Firebase disabled): $eventName with params: $parameters');
+    return;
+    
+    // if (_analytics == null) {
+    //   LogUtil.w('Analytics not initialized, skipping event: $eventName');
+    //   return;
+    // }
 
-    try {
-      // Add metadata
-      final enrichedParams = await _enrichParameters(parameters);
+    // try {
+    //   // Add metadata
+    //   final enrichedParams = await _enrichParameters(parameters);
 
-      // Log to Firebase Analytics
-      await _analytics!.logEvent(
-        name: eventName,
-        parameters: enrichedParams,
-      );
+    //   // Log to Firebase Analytics
+    //   await _analytics!.logEvent(
+    //     name: eventName,
+    //     parameters: enrichedParams,
+    //   );
 
-      LogUtil.d('Event logged: $eventName with params: $enrichedParams');
-    } catch (e) {
-      LogUtil.e('Failed to log event: $eventName', e);
-    }
+    //   LogUtil.d('Event logged: $eventName with params: $enrichedParams');
+    // } catch (e) {
+    //   LogUtil.e('Failed to log event: $eventName', e);
+    // }
   }
 
   /// Log click event
@@ -180,17 +189,21 @@ class AnalyticsManager {
   /// AnalyticsManager.setUserId('user_123');
   /// ```
   static Future<void> setUserId(String? userId) async {
-    if (_analytics == null) {
-      LogUtil.w('Analytics not initialized, skipping set user ID');
-      return;
-    }
+    // Firebase temporarily disabled
+    LogUtil.d('Set user ID (Firebase disabled): $userId');
+    return;
+    
+    // if (_analytics == null) {
+    //   LogUtil.w('Analytics not initialized, skipping set user ID');
+    //   return;
+    // }
 
-    try {
-      await _analytics!.setUserId(id: userId);
-      LogUtil.d('User ID set: $userId');
-    } catch (e) {
-      LogUtil.e('Failed to set user ID', e);
-    }
+    // try {
+    //   await _analytics!.setUserId(id: userId);
+    //   LogUtil.d('User ID set: $userId');
+    // } catch (e) {
+    //   LogUtil.e('Failed to set user ID', e);
+    // }
   }
 
   /// Set user property
@@ -206,17 +219,21 @@ class AnalyticsManager {
   /// AnalyticsManager.setUserProperty('user_type', 'premium');
   /// ```
   static Future<void> setUserProperty(String name, String? value) async {
-    if (_analytics == null) {
-      LogUtil.w('Analytics not initialized, skipping set user property');
-      return;
-    }
+    // Firebase temporarily disabled
+    LogUtil.d('Set user property (Firebase disabled): $name = $value');
+    return;
+    
+    // if (_analytics == null) {
+    //   LogUtil.w('Analytics not initialized, skipping set user property');
+    //   return;
+    // }
 
-    try {
-      await _analytics!.setUserProperty(name: name, value: value);
-      LogUtil.d('User property set: $name = $value');
-    } catch (e) {
-      LogUtil.e('Failed to set user property', e);
-    }
+    // try {
+    //   await _analytics!.setUserProperty(name: name, value: value);
+    //   LogUtil.d('User property set: $name = $value');
+    // } catch (e) {
+    //   LogUtil.e('Failed to set user property', e);
+    // }
   }
 
   /// Enrich parameters with metadata
@@ -258,16 +275,20 @@ class AnalyticsManager {
   /// AnalyticsManager.reset();
   /// ```
   static Future<void> reset() async {
-    if (_analytics == null) {
-      LogUtil.w('Analytics not initialized, skipping reset');
-      return;
-    }
+    // Firebase temporarily disabled
+    LogUtil.d('Analytics reset (Firebase disabled)');
+    return;
+    
+    // if (_analytics == null) {
+    //   LogUtil.w('Analytics not initialized, skipping reset');
+    //   return;
+    // }
 
-    try {
-      await _analytics!.setUserId(id: null);
-      LogUtil.d('Analytics data reset');
-    } catch (e) {
-      LogUtil.e('Failed to reset analytics', e);
-    }
+    // try {
+    //   await _analytics!.setUserId(id: null);
+    //   LogUtil.d('Analytics data reset');
+    // } catch (e) {
+    //   LogUtil.e('Failed to reset analytics', e);
+    // }
   }
 }

@@ -56,7 +56,7 @@ This implementation plan breaks down the enterprise Flutter framework into discr
     - Implement MD5 hash method for cache keys
     - _Requirements: 4.3_
   
-  - [ ]* 4.2 Write property test for EncryptionUtil
+  - [x] 4.2 Write property test for EncryptionUtil
     - **Property 10: Sensitive Data Encryption**
     - **Validates: Requirements 4.3**
   
@@ -66,7 +66,7 @@ This implementation plan breaks down the enterprise Flutter framework into discr
     - Implement ID card validation
     - _Requirements: 1.4_
   
-  - [ ]* 4.4 Write unit tests for ValidationUtil
+  - [x] 4.4 Write unit tests for ValidationUtil
     - Test valid and invalid phone numbers
     - Test valid and invalid emails
     - Test valid and invalid ID cards
@@ -78,7 +78,7 @@ This implementation plan breaks down the enterprise Flutter framework into discr
     - Implement phone number masking
     - _Requirements: 1.4_
   
-  - [ ]* 4.6 Write unit tests for FormatUtil
+  - [x] 4.6 Write unit tests for FormatUtil
     - Test date formatting with various patterns
     - Test amount formatting with different decimals
     - Test phone masking
@@ -160,7 +160,7 @@ This implementation plan breaks down the enterprise Flutter framework into discr
     - Implement call method with cleanup logic
     - _Requirements: 1.6, 21.2, 21.3_
   
-  - [ ]* 9.3 Write property test for LogoutUseCase
+  - [x] 9.3 Write property test for LogoutUseCase
     - **Property 40: Logout Data Cleanup**
     - **Validates: Requirements 21.3**
   
@@ -174,7 +174,7 @@ This implementation plan breaks down the enterprise Flutter framework into discr
     - Implement call method
     - _Requirements: 1.6, 20.3_
   
-  - [ ]* 9.6 Write property test for MarkMessageReadUseCase
+  - [-] 9.6 Write property test for MarkMessageReadUseCase
     - **Property 35: Message Mark as Read**
     - **Validates: Requirements 20.3**
   
